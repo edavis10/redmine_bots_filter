@@ -63,6 +63,8 @@ class BotsFilterTest < ActionController::IntegrationTest
     @repository = Repository::Subversion.create(:url => "file:///#{ActiveSupport::TestCase.repository_path('subversion')}", :project => @project) do |repo|
       repo.type = 'Subversion'
     end
+
+    @issue = Issue.generate_for_project!(@project)
   end
   
   context "repositories" do
@@ -95,6 +97,54 @@ class BotsFilterTest < ActionController::IntegrationTest
     should_block_bots { "/projects/bots/wiki/Start?format=txt" }
     should_not_block_browsers { "/projects/bots/wiki/Start?format=txt" }
   end
-  
+
+  context "issues in default format" do
+    should_not_block_bots { "/issues" }
+    should_not_block_bots { "/projects/bots/issues" }
+    should_not_block_browsers { "/issues" }
+    should_not_block_browsers { "/projects/bots/issues" }
+    # TODO: single issue
+  end
+
+  context "issues in the Atom format" do
+    should_block_bots { "/issues.atom" }
+    should_block_bots { "/projects/bots/issues.atom" }
+    should_not_block_browsers { "/issues.atom" }
+    should_not_block_browsers { "/projects/bots/issues.atom" }
+    # TODO: single issue
+  end
+
+  context "issues in the xml format" do
+    should_block_bots { "/issues.xml" }
+    should_block_bots { "/projects/bots/issues.xml" }
+    should_not_block_browsers { "/issues.xml" }
+    should_not_block_browsers { "/projects/bots/issues.xml" }
+    # TODO: single issue
+  end
+
+  context "issues in the JSON format" do
+    should_block_bots { "/issues.json" }
+    should_block_bots { "/projects/bots/issues.json" }
+    should_not_block_browsers { "/issues.json" }
+    should_not_block_browsers { "/projects/bots/issues.json" }
+    # TODO: single issue
+  end
+
+  context "issues in the CSV format" do
+    should_block_bots { "/issues.csv" }
+    should_block_bots { "/projects/bots/issues.csv" }
+    should_not_block_browsers { "/issues.csv" }
+    should_not_block_browsers { "/projects/bots/issues.csv" }
+    # TODO: single issue
+  end
+
+  context "issues in the PDF format" do
+    should_block_bots { "/issues.pdf" }
+    should_block_bots { "/projects/bots/issues.pdf" }
+    should_not_block_browsers { "/issues.pdf" }
+    should_not_block_browsers { "/projects/bots/issues.pdf" }
+    # TODO: single issue
+  end
+
 end
 
