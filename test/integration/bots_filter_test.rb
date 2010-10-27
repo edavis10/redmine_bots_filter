@@ -54,5 +54,13 @@ class BotsFilterTest < ActionController::IntegrationTest
     should_not_block_browsers { "/projects/bots/issues/gantt" }
   end
   
+  context "calendars" do
+    should_block_bots { "/issues/calendar" }
+    should_block_bots { "/projects/bots/issues/calendar" }
+
+    should_not_block_browsers { "/issues/calendar" }
+    should_not_block_browsers { "/projects/bots/issues/calendar" }
+  end
+  
 end
 
