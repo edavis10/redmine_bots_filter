@@ -41,7 +41,7 @@ module RedmineBotsFilter
   BOTS_USER_AGENT_RE = Regexp.new("(#{BOTS_USER_AGENT.collect {|a| Regexp.escape(a)}.join('|')})", Regexp::IGNORECASE)
   
   def bot_request?
-    request.user_agent.match(BOTS_USER_AGENT_RE)
+    request.user_agent.present? && request.user_agent.match(BOTS_USER_AGENT_RE)
   end
 end
 
