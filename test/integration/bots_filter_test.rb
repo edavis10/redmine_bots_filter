@@ -50,7 +50,7 @@ class BotsFilterTest < ActionController::IntegrationTest
   def self.should_not_block_browsers(&path_proc)
     path = path_proc.call
 
-    should "not block browsers" do
+    should "not block browsers from '#{path}'" do
       visit path
       assert_response :success
     end
