@@ -146,5 +146,12 @@ class BotsFilterTest < ActionController::IntegrationTest
     # TODO: single issue
   end
 
+  context "activities" do
+    should_block_bots { "/activity" }
+    should_block_bots { "/projects/bots/activity" }
+    should_not_block_browsers { "/activity" }
+    should_not_block_browsers { "/projects/bots/activity" }
+  end
+  
 end
 

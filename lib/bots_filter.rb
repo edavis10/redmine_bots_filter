@@ -23,6 +23,7 @@ module RedmineBotsFilter
            (controller_name == 'issues' && !params[:query_id].blank?) ||
            (controller_name == 'gantts') ||
            (controller_name == 'calendars') ||
+           (controller_name == 'activities') ||
            (controller_name == 'wiki' && (action_name == 'history' || !params[:version].blank?))
            
         render :text => 'Bots are not allowed to view this page.', :layout => false, :status => 403
