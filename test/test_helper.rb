@@ -118,12 +118,12 @@ class ActiveSupport::TestCase
   end
 
   def configure_plugin(configuration_change={})
-    Setting.plugin_TODO = {
-      
+    Setting.plugin_redmine_bots_filter = {
+      'bots' => "googlebot,yahoo! slurp,msnbot,baiduspider,yandex,spider\nrobot"
     }.merge(configuration_change)
   end
 
   def reconfigure_plugin(configuration_change)
-    Settings['plugin_TODO'] = Setting['plugin_TODO'].merge(configuration_change)
+    Setting['plugin_redmine_bots_filter'] = Setting['plugin_redmine_bots_filter'].merge(configuration_change)
   end
 end

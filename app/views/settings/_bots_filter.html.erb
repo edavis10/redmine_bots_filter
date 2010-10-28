@@ -1,0 +1,5 @@
+<p>
+  <%= content_tag(:label, l(:label_bots), :for => 'bots') %>
+  <%= content_tag(:span, l(:text_bots_to_block_help)) %>
+  <%= text_area_tag('settings[bots]', @settings['bots'], :rows => 10, :cols => 80, :id => 'bots') %>
+</p>

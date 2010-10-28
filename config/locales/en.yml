@@ -1,0 +1,4 @@
+en:
+  label_bots: Bots
+  text_bots_to_block_help: "Enter the user agents of the bots that should be blocked. Separate multiple bots with commas or returns (newlines)"
+

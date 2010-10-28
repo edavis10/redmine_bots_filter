@@ -33,18 +33,17 @@ module RedmineBotsFilter
     true
   end
   
-  BOTS_USER_AGENT = ['googlebot', 
-                     'yahoo! slurp',
-                     'msnbot',
-                     'baiduspider',
-                     'yandex',
-                     'spider',
-                     'robot']
-                     
-  BOTS_USER_AGENT_RE = Regexp.new("(#{BOTS_USER_AGENT.collect {|a| Regexp.escape(a)}.join('|')})", Regexp::IGNORECASE)
+  def bots_to_filter
+    bots = Setting.plugin_redmine_bots_filter["bots"]
+    bots.to_s.split(/[\n,]/).collect(&:strip)
+  end
+  
+  def bots_user_agent_regexp
+    Regexp.new("(#{bots_to_filter.collect {|a| Regexp.escape(a)}.join('|')})", Regexp::IGNORECASE)
+  end
   
   def bot_request?
-    request.user_agent.present? && request.user_agent.match(BOTS_USER_AGENT_RE)
+    request.user_agent.present? && bots_to_filter.present? && request.user_agent.match(bots_user_agent_regexp)
   end
 end
 

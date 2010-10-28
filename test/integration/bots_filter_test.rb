@@ -3,6 +3,8 @@ require 'test_helper'
 class BotsFilterTest < ActionController::IntegrationTest
 
   def setup
+    configure_plugin
+
     Role.anonymous.update_attribute(:permissions, Redmine::AccessControl.permissions.collect(&:name)) # All permissions for anon
     @project = Project.generate!(:is_public => true, :identifier => 'bots').reload
     WikiPage.generate!(:wiki => @project.wiki, :title => 'Start', :content => WikiContent.new(:text => 'Hello'))
